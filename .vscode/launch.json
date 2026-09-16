@@ -1,0 +1,16 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Moje Financije — pokreni aplikaciju",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/node_modules/@nodegui/nodegui/scripts/qode.js",
+      "args": ["${workspaceFolder}/src/app.mjs"],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "preLaunchTask": "Moje Financije — priprema",
+      "skipFiles": ["<node_internals>/**"]
+    }
+  ]
+}
