@@ -1,0 +1,5 @@
+export const euro=v=>new Intl.NumberFormat("hr-HR",{style:"currency",currency:"EUR"}).format(Number(v)||0);
+export const monthKey=v=>String(v||"").slice(0,7);
+export function summary(rows,month){const current=rows.filter(x=>monthKey(x.tx_date)===month);return{income:current.filter(x=>x.kind==="Prihod").reduce((s,x)=>s+Number(x.amount),0),expense:current.filter(x=>x.kind==="Rashod").reduce((s,x)=>s+Number(x.amount),0),balance:rows.reduce((s,x)=>s+(x.kind==="Prihod"?1:-1)*Number(x.amount),0)}}
+export function validateTransaction(t){if(!/^\d{4}-\d{2}-\d{2}$/.test(t.tx_date))throw Error("Datum mora biti GGGG-MM-DD.");if(!["Prihod","Rashod"].includes(t.kind))throw Error("Odaberite vrstu.");if(!(Number(t.amount)>0))throw Error("Iznos mora biti veći od nule.");if(!t.category?.trim())throw Error("Odaberite kategoriju.");return{...t,amount:Number(t.amount),description:(t.description||"").trim()}}
+export function csv(rows){const q=v=>'"'+String(v??"").replaceAll('"','""')+'"';return["Datum;Vrsta;Iznos;Kategorija;Račun;Opis",...rows.map(x=>[x.tx_date,x.kind,Number(x.amount).toFixed(2),x.category,x.account,x.description].map(q).join(";"))].join("\n")}
