@@ -1,0 +1,14 @@
+# Privatna Firebase konfiguracija i lokalni podaci
+.env
+.env.*
+!.env.example
+data/
+*.db
+*.db-*
+*.sqlite
+*.sqlite-*
+
+# Instalirani paketi i izlazne datoteke
+node_modules/
+release/
+*.log
